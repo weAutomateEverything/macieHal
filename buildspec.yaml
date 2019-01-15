@@ -1,0 +1,16 @@
+version: 0.2
+env:
+  variables:
+    GO111MODULE: "on"
+phases:
+  pre_build:
+    commands:
+
+  build:
+    commands:
+      - GOOS=linux go build -ldflags="-s -w" -o bin/alert/dynatrace alert/dynatrace/main.go
+      - sls plugin install --name serverless-domain-manager
+      - sls deploy --verbose
+
+  post_build:
+    commands:

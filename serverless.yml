@@ -1,0 +1,32 @@
+service: serverless-macie
+
+frameworkVersion: ">=1.28.0 <2.0.0"
+
+provider:
+  name: aws
+  runtime: go1.x
+  region: us-east-1
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "ssm:GetParameter"
+      Resource: "*"
+
+
+package:
+ exclude:
+   - ./**
+ include:
+   - ./bin/**
+
+functions:
+  alert:
+    handler: bin/alert
+    memorySize: 128
+    events:
+      - cloudwatchEvent:
+          event:
+            source:
+              - "aws.macie"
+            detail-type:
+              - "Macie Alert"
