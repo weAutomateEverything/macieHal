@@ -8,8 +8,7 @@ phases:
 
   build:
     commands:
-      - GOOS=linux go build -ldflags="-s -w" -o bin/alert/dynatrace alert/dynatrace/main.go
-      - sls plugin install --name serverless-domain-manager
+      - GOOS=linux go build -ldflags="-s -w" -o bin/alert main.go
       - sls deploy --verbose
 
   post_build:
