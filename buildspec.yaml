@@ -8,6 +8,9 @@ phases:
 
   build:
     commands:
+      - curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+      - apt-get install -y nodejs
+      - npm install -g serverless
       - GOOS=linux go build -ldflags="-s -w" -o bin/alert main.go
       - sls deploy --verbose
 
