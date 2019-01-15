@@ -7,6 +7,7 @@ import (
 	"github.com/kyokomi/emoji"
 	"github.com/weAutomateEverything/serverless-alerting/alert/lambda/client"
 	client2 "github.com/weAutomateEverything/serverless-alerting/alert/text/client"
+	"strings"
 )
 
 func main() {
@@ -25,7 +26,7 @@ func Handle(event events.CloudWatchEvent) error {
 		"Description: %v\n"+
 		"Risk: %v\n"+
 		"Type:%v\n"+
-		"URL:%v\n", detail.Name, detail.RiskScore, detail.NotificationType, detail.URL))
+		"URL:%v\n", strings.Replace(detail.Name,"_"," ",-1), detail.RiskScore, detail.NotificationType, detail.URL))
 
 	if err != nil {
 		client.LogLambdaError(err)

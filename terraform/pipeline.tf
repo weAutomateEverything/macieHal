@@ -222,7 +222,19 @@ resource "aws_iam_role_policy" "build" {
           ],
           "Resource": "*",
           "Effect": "Allow"
-      }
+      },
+      {
+          "Effect": "Allow",
+          "Resource": [
+            "*"
+          ],
+          "Action": [
+            "events:PutRule",
+            "events:DescribeRule",
+            "events:PutTargets"
+
+          ]
+        }
 	],
 	"Version": "2012-10-17"
 }
