@@ -1,5 +1,5 @@
 variable "name" {
-  default = "serverless-alerting"
+  default = "macie-alerting"
 }
 
 resource "aws_iam_role" "pipeline" {
@@ -238,7 +238,7 @@ resource "aws_codebuild_project" "serverless" {
   }
   "environment" {
     compute_type = "BUILD_GENERAL1_SMALL"
-    image = "954064918141.dkr.ecr.eu-west-1.amazonaws.com/gosls:latest"
+    image = "aws/codebuild/golang:1.11"
     type = "LINUX_CONTAINER"
   }
   "source" {
@@ -268,7 +268,7 @@ resource "aws_codepipeline" "lambda" {
       version = "1"
       configuration {
         Owner = "weAutomateEverything"
-        Repo = "serverless-alerting"
+        Repo = "macieHal"
         Branch = "master"
         OAuthToken = "${var.github_key}"
       }
